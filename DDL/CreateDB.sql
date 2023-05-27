@@ -1,0 +1,2 @@
+CREATE DATABASE Sistema_Electoral
+GO
