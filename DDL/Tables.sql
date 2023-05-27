@@ -66,7 +66,6 @@ CREATE TABLE el_sistema_votacion(
 	ese_id INT NOT NULL,
 	esv_nombre VARCHAR(75) NOT NULL,
 	esv_desc VARCHAR(100) NOT NULL,
-	esv_activo BIT NOT NULL,
 	PRIMARY KEY(esv_id),
 	CONSTRAINT FK_el_sistema_elec_vot FOREIGN KEY(ese_id) REFERENCES el_sistema_electoral(ese_id),
 	CONSTRAINT UC_ese_id UNIQUE(ese_id)
@@ -77,6 +76,7 @@ CREATE TABLE el_eleccion(
 	ese_id INT NOT NULL,
 	eel_nombre VARCHAR(75) NOT NULL,
 	eel_fecha DATE NOT NULL,
+	eel_activo BIT NOT NULL,
 	PRIMARY KEY(eel_id),
 	CONSTRAINT FK_sistema_electoral FOREIGN KEY(ese_id) REFERENCES el_sistema_electoral(ese_id)
 );

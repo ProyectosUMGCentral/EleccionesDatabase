@@ -37,12 +37,12 @@ INSERT INTO el_sistema_electoral (ese_nombre, ese_feha_inicio, ese_fecha_fin)
 VALUES ('Elecciones Generales 2023', '2023-07-01', '2023-07-31');
 
 -- INSERT INTO el_sistema_votacion
-INSERT INTO el_sistema_votacion (ese_id, esv_nombre, esv_desc, esv_activo)
-VALUES (1, 'Sistema de Voto Electrónico', 'Sistema de votación electrónica para las elecciones generales 2023', 1);
+INSERT INTO el_sistema_votacion (ese_id, esv_nombre, esv_desc)
+VALUES (1, 'Sistema de Voto Electrónico', 'Sistema de votación electrónica para las elecciones generales 2023');
 
 -- INSERT INTO el_eleccion
-INSERT INTO el_eleccion (ese_id, eel_nombre, eel_fecha)
-VALUES (1, 'Elecciones Presidenciales', '2023-07-15');
+INSERT INTO el_eleccion (ese_id, eel_nombre, eel_fecha, eel_activo)
+VALUES (1, 'Elecciones Presidenciales', '2023-07-15', 0);
 
 
 -- INSERT INTO el_cargo
