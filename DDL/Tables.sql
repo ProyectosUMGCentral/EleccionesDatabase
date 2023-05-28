@@ -43,7 +43,8 @@ CREATE TABLE el_ciudadano(
 	ec_num_tel VARCHAR(8),
 	PRIMARY KEY(ec_id), 
 	CONSTRAINT FK_el_ciudadano_tipoID FOREIGN KEY(eti_id) REFERENCES el_tipo_identificacion(eti_id),
-	CONSTRAINT FK_el_ciudadano_municipio FOREIGN KEY(em_id) REFERENCES el_municipio(em_id)
+	CONSTRAINT FK_el_ciudadano_municipio FOREIGN KEY(em_id) REFERENCES el_municipio(em_id),
+	CONSTRAINT UQ_num_id UNIQUE(ec_num_identificacion)
 );
 
 CREATE TABLE el_partido_politico(
@@ -159,7 +160,6 @@ CREATE TABLE el_autoridad_mesa(
 CREATE TABLE el_bitacora_votacion(
 	ec_id INT NOT NULL,
 	eel_id INT NOT NULL,
-	ebv_participo_votacion BIT NOT NULL,
 	PRIMARY KEY(ec_id, eel_id),
 	CONSTRAINT FK_Bitacora_Citizen FOREIGN KEY(ec_id) REFERENCES el_ciudadano(ec_id),
 	CONSTRAINT FK_Bitacora_Eleccion FOREIGN KEY(eel_id) REFERENCES el_eleccion(eel_id)
