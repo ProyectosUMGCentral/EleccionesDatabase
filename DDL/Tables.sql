@@ -171,7 +171,6 @@ CREATE TABLE el_votos(
 	etv_id INT NOT NULL,
 	eam_id INT NOT NULL,
 	ev_valido BIT NOT NULL,
-	PRIMARY KEY(ecan_id, eel_id),
 	CONSTRAINT FK_Voto_Candidato FOREIGN KEY(ecan_id) REFERENCES el_candidato(ecan_id),
 	CONSTRAINT FK_Voto_Eleccion FOREIGN KEY(eel_id) REFERENCES el_eleccion(eel_id),
 	CONSTRAINT FK_Voto_Terminal FOREIGN KEY(etv_id) REFERENCES el_terminal_voto(etv_id),
