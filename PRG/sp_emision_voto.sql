@@ -29,7 +29,7 @@ AS
 
 */
 BEGIN
-    DECLARE @w_cliente_id INT
+    DECLARE @w_votante_id INT
     BEGIN TRY
 
         IF NOT EXISTS(
@@ -42,11 +42,11 @@ BEGIN
             RAISERROR('ELECCION AUN NO HA COMENZADO O YA NO SE ENCUENTRA ACTIVA.', 16, 1)
         END
 
-        SELECT @w_cliente_id = ec_id
+        SELECT @w_votante_id = ec_id
         FROM el_ciudadano
         WHERE ec_num_identificacion = @i_num_identificacion
 
-        IF(@w_cliente_id IS NULL)
+        IF(@w_votante_id IS NULL)
         BEGIN
             RAISERROR('PERSONA NO REGISTRADA EN BASE DE DATOS DE CIUDADANOS LEGALMENTE INSCRITOS', 16, 1)
         END
@@ -82,7 +82,7 @@ BEGIN
         IF EXISTS(
             SELECT 1
             FROM el_bitacora_votacion
-            WHERE ec_id = @w_cliente_id
+            WHERE ec_id = @w_votante_id
             AND eel_id = @i_eleccion
         )
         BEGIN
@@ -104,7 +104,7 @@ BEGIN
             INNER JOIN el_municipio em ON em.em_id = ecv.em_id
             INNER JOIN el_ciudadano ec ON ec.em_id = em.em_id
             WHERE ecv.ecv_id = @i_centro_votacion
-            AND ec.ec_id = @w_cliente_id
+            AND ec.ec_id = @w_votante_id
         )
         BEGIN
             RAISERROR('Lo sentimos, pero la persona que está intentando votar no está asignada al centro de votación donde desea emitir su voto. Para poder participar en las elecciones, es necesario que estés asignado al centro de votación correspondiente a tu ubicación registrada. Te recomendamos verificar la información proporcionada y asegurarte de haber seleccionado el centro de votación correcto. Si tienes alguna pregunta o necesitas asistencia adicional, por favor acércate a nuestro personal encargado de las elecciones. ¡Gracias por tu comprensión y participación cívica!', 16, 1)
@@ -120,7 +120,7 @@ BEGIN
         
         INSERT INTO el_bitacora_votacion 
                     (ec_id,         eel_id)
-        VALUES      (@w_cliente_id, @i_eleccion)
+        VALUES      (@w_votante_id, @i_eleccion)
 
         COMMIT TRAN
 
