@@ -19,9 +19,9 @@ VALUES ('Documento de Identificación Personal', 'DPI');
 
 -- INSERT INTO el_ciudadano
 INSERT INTO el_ciudadano (eti_id, em_id, ec_num_identificacion, ec_nombre1, ec_nombre2, ec_nombre3, ec_apellido1, ec_apellido2, ec_apellido3, ec_fecha_nac, ec_correo_electronico, ec_num_tel)
-VALUES (1, 1, '123456789101', 'Juan', 'Carlos', 'Pérez', 'González', NULL, 'López', '1980-01-01', 'juan.perez@example.com', '12345678'),
-       (1, 1, '987654321012', 'María', 'Isabel', 'González', 'Hernández', 'López', 'Pérez', '1995-05-15', 'maria.gonzalez@example.com', '98765432'),
-       (1, 1, '456789123103', 'Pedro', 'Alejandro', 'López', 'Hernández', NULL, NULL, '1988-09-10', 'pedro.lopez@example.com', '45678912'),
+VALUES (1, 1, '1234567891012', 'Juan', 'Carlos', 'Pérez', 'González', NULL, 'López', '1980-01-01', 'juan.perez@example.com', '12345678'),
+       (1, 1, '9876543210123', 'María', 'Isabel', 'González', 'Hernández', 'López', 'Pérez', '1995-05-15', 'maria.gonzalez@example.com', '98765432'),
+       (1, 1, '4567891231034', 'Pedro', 'Alejandro', 'López', 'Hernández', NULL, NULL, '1988-09-10', 'pedro.lopez@example.com', '45678912'),
        (1, 1, '9876543210987', 'Sandra', NULL, NULL, 'Torres', NULL, NULL, '1970-05-15', 'sandra.torres@example.com', '87654321');
 
 -- INSERT INTO el_partido_politico
