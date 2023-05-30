@@ -9,7 +9,8 @@ END
 GO
 
 CREATE PROCEDURE sp_cons_info(
-	@i_modo_consulta VARCHAR(200)
+	@i_modo_consulta VARCHAR(50),
+    @i_centro_votacion INT = NULL
 )
 AS
 /*
@@ -24,10 +25,51 @@ AS
 
 */
 BEGIN
-    DECLARE @w_cliente_id INT
     BEGIN TRY
 
-    SELECT 'TEST' = 'TEST'
+    IF @i_modo_consulta NOT IN ('CONTEO-VOTOS', 'PORCENTAJE-CV')
+    BEGIN
+        RAISERROR('MODO DE CONSULTA NO VALIDO', 16, 1)
+    END
+
+    IF @i_modo_consulta = 'CONTEO-VOTOS'
+    BEGIN
+
+        SELECT 'Cantidad-Votos' = COUNT(*)
+        FROM el_centro_votacion ecv
+        INNER JOIN el_terminal_voto etv ON etv.ecv_id = ecv.ecv_id
+        INNER JOIN el_votos ev ON ev.etv_id = etv.etv_id
+        WHERE ecv.ecv_id = @i_centro_votacion OR @i_centro_votacion IS NULL
+
+        RETURN 1
+        
+    END
+
+    IF @i_modo_consulta = 'PORCENTAJE-CV'
+    BEGIN
+
+        IF @i_centro_votacion IS NULL
+        BEGIN
+            RAISERROR('DEBE INGRESAR CENTRO DE VOTACION PARA OBTENER EL PORCENTAJE DE CENTRO DE VOTACION', 16, 1)
+        END
+
+        DECLARE @total_votos INT
+
+        SELECT @total_votos = COUNT(*)
+        FROM el_centro_votacion ecv
+        INNER JOIN el_terminal_voto etv ON etv.ecv_id = ecv.ecv_id
+        INNER JOIN el_votos ev ON ev.etv_id = etv.etv_id
+        WHERE ecv.ecv_id > 0
+
+        SELECT 'Porcentaje' = (COUNT(*) * 100.0) / @total_votos
+        FROM el_centro_votacion ecv
+        INNER JOIN el_terminal_voto etv ON etv.ecv_id = ecv.ecv_id
+        INNER JOIN el_votos ev ON ev.etv_id = etv.etv_id
+        WHERE ecv.ecv_id = @i_centro_votacion
+
+        RETURN 1
+        
+    END
 
     END TRY
     BEGIN CATCH
