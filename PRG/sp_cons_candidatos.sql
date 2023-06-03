@@ -37,7 +37,10 @@ begin
 		 D.em_id,
 		 D.em_nombre,
 		 E.ee_id,
-		 E.ee_nombre	 
+		 E.ee_nombre,
+		 F.epp_id,
+		 F.epp_nombre,
+		 F.epp_abreviatura	 
 	FROM el_candidato A
 	 JOIN el_cargo B
 	  ON A.eca_id = B.eca_id
@@ -47,6 +50,8 @@ begin
 	  ON C.em_id = D.em_id
 	 JOIN  el_estado E
 	  ON D.ee_id = E.ee_id
+	 JOIN el_partido_politico F
+	  ON F.epp_id = A. epp_id
 	WHERE ( B.eca_id = @CARGO OR @CARGO IS NULL )
 	      AND ( D.em_id = @MUNICIPIO OR @MUNICIPIO IS NULL ) 
 		  AND (  E.ee_id = @DEPARTAMENTO OR @DEPARTAMENTO IS NULL )
